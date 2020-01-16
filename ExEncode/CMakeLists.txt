@@ -1,21 +1,12 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-
-# UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags set by default system
-if(UNIX)
-    message("This is a ${CMAKE_SYSTEM_NAME} system")
-elseif(WIN32)
-    message("This is a Windows System")
-endif()
-# or use MATCHES to see if actual system name 
-# Darwin is Apple's system name
+set(OS_VERSION "Linux")
 if(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
-    message("This is a ${CMAKE_SYSTEM_NAME} system")
+    set(OS_VERSION "MacOS")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES Windows)
-    message("This is a Windows System")
+    set(OS_VERSION "Windows")
 endif()
-
 
 project (ExEncoder)
 project(ExEncoder VERSION 1.0)
@@ -29,6 +20,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 message("----------------------------------------")
+message("OS Type: ${OS_VERSION}")
+message("OS Name: ${CMAKE_SYSTEM_NAME}")
 message("CXX Standard: ${CMAKE_CXX_STANDARD}")
 message("Source dir: ${CMAKE_SOURCE_DIR}")
 message("Include path: ${CMAKE_INCLUDE_PATH}")
