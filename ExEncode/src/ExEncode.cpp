@@ -3,8 +3,8 @@
 #include <iostream>
 #include "../include/exencode/exencode.h"
 
-#ifndef CMAKEMACROSAMPLE
-    #define CMAKEMACROSAMPLE "NO SYSTEM NAME"
+#ifndef PLATFORM
+    #define PLATFORM "NO SYSTEM NAME"
 #endif
 
 auto sum(int a, int b) {
@@ -15,7 +15,7 @@ auto sum(int a, int b) {
 int main()
 {
     
-    std::cout << CMAKEMACROSAMPLE;
+    std::cout << PLATFORM;
 
     std::cout << "x";
 
