@@ -1,23 +1,23 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-set(OS_VERSION "Linux")
-if(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
-    set(OS_VERSION "MacOS")
-elseif(${CMAKE_SYSTEM_NAME} MATCHES Windows)
-    set(OS_VERSION "Windows")
-endif()
-
 project (ExEncoder)
 #project(ExEncoder VERSION 1.0)
 
+if(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+    add_definitions(-DPLATFORM=macos)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES Windows)
+    add_definitions(-DPLATFORM=windows)
+elseif(UNIX)
+    add_definitions(-DPLATFORM=linux)
+endif()
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MT")
 set(CMAKE_CXX_STANDARD 17)
 
+add_executable(exencoder src/ExEncode.cpp)
 
-
-add_definitions(-DCMAKEMACROSAMPLE=1)
+TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
 
 message("----------------------------------------")
 message("OS Type: ${OS_VERSION}")
@@ -28,11 +28,14 @@ message("Include path: ${CMAKE_INCLUDE_PATH}")
 message("Cmake home dir: ${CMAKE_HOME_DIRECTORY}")
 message("Cmake binary dir: ${CMAKE_BINARY_DIR}")
 message("EXE output: ${EXECUTABLE_OUTPUT_PATH}")
-message("Flags: ${CMAKE_CXX_FLAGS}")
-message("Flags: ${CMAKE_C_FLAGS}")
-message("Flags: ${TARGET}")
+message("CXX Flags: ${CMAKE_CXX_FLAGS}")
 message("----------------------------------------")
 
-add_executable(exencoder src/ExEncode.cpp)
 
-TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
+#if (WIN32)
+#    set(CMAKE_SHARED_LINKER_FLAGS /MANIFEST:NO)
+#endif()
+#add_custom_command(
+#    TARGET exencoder
+#    POST_BUILD COMMAND "mt.exe" -manifest \"${EXECUTABLE_OUTPUT_PATH}\\exencoder.exe.manifest\" -outputresource:\"${EXECUTABLE_OUTPUT_PATH}\\exencoder.exe\"\;\#2
+#    COMMENT "Adding custom manifest containing MSVCRT80 dependency..." )

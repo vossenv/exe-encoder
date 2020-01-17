@@ -5,7 +5,6 @@
             "generator": "Ninja",
             "configurationType": "Release",
             "buildRoot": "${projectDir}\\build",
-            "installRoot": "${projectDir}\\out\\install\\${name}",
             "cmakeExecutable": "C:/Program Files/CMake/bin/cmake.exe",
             "cmakeCommandArgs": "",
             "buildCommandArgs": "-v",
