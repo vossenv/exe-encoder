@@ -27,7 +27,9 @@ message("Include path: ${CMAKE_INCLUDE_PATH}")
 message("Cmake home dir: ${CMAKE_HOME_DIRECTORY}")
 message("Cmake binary dir: ${CMAKE_BINARY_DIR}")
 message("EXE output: ${EXECUTABLE_OUTPUT_PATH}")
+message("Flags: ${CMAKE_CXX_FLAGS}")
+message("Flags: ${CMAKE_C_FLAGS}")
 message("----------------------------------------")
 
-add_executable(exenc src/ExEncode.cpp)
+add_executable(exencoder src/ExEncode.cpp)
 
