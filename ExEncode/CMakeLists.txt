@@ -16,6 +16,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
 
 
+
 add_definitions(-DCMAKEMACROSAMPLE=1)
 
 message("----------------------------------------")
@@ -29,7 +30,9 @@ message("Cmake binary dir: ${CMAKE_BINARY_DIR}")
 message("EXE output: ${EXECUTABLE_OUTPUT_PATH}")
 message("Flags: ${CMAKE_CXX_FLAGS}")
 message("Flags: ${CMAKE_C_FLAGS}")
+message("Flags: ${TARGET}")
 message("----------------------------------------")
 
 add_executable(exencoder src/ExEncode.cpp)
 
+TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
