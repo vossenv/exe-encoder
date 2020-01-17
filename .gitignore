@@ -40,3 +40,8 @@ enc_temp_folder*
 obj*
 dist*
 build/
+
+*.vcxproj
+*.sln
+*.filters
+*.user
