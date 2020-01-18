@@ -1,8 +1,19 @@
 
 cmake_minimum_required(VERSION 3.15)
+file(MAKE_DIRECTORY ../build)
 
 project (exencoder)
-#project(ExEncoder VERSION 1.0)
+add_executable(exencoder exencode/src/App.cpp)
+
+include_directories(libs)
+target_include_directories(exencoder PUBLIC exencode/include)
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_CXX_STANDARD 17)
+
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
+endif()
 
  if(WIN32)
     add_definitions(-DPLATFORM="windows")
@@ -12,17 +23,10 @@ project (exencoder)
     add_definitions(-DPLATFORM="linux")
  endif()
 
-file(MAKE_DIRECTORY ../build)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_CXX_STANDARD 17)
-
-add_executable(exencoder exencode/src/App.cpp)
-
-TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
-
 message("----------------------------------------")
 message("OS Name: ${CMAKE_SYSTEM_NAME}")
 message("CXX Standard: ${CMAKE_CXX_STANDARD}")
+message("Compiler: ${CMAKE_CXX_COMPILER_ID}")
 message("Source dir: ${CMAKE_SOURCE_DIR}")
 message("Include path: ${CMAKE_INCLUDE_PATH}")
 message("Cmake home dir: ${CMAKE_HOME_DIRECTORY}")

@@ -1,7 +1,8 @@
 
 
 #include <iostream>
-#include "../include/exencode/exencode.h"
+#include <exencode/exencode.h>
+#include <CLI11.hpp>
 
 #ifndef PLATFORM
     #define PLATFORM "NO SYSTEM NAME"
