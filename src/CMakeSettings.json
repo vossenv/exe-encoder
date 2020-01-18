@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "x64-Release",
-            "generator": "Unix Makefiles",
+            "generator": "Ninja",
             "configurationType": "Release",
             "buildRoot": "${workspaceRoot}\\build",
             "cmakeExecutable": "C:/Program Files/CMake/bin/cmake.exe",
