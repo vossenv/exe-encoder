@@ -13,6 +13,23 @@
 //#include <stdexcept>
 //#include "prtk.txt"
 
+
+#define WINDOWS
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
+
+std::string get_current_dir() {
+	char buff[FILENAME_MAX]; //create string buffer to hold path
+	GetCurrentDir(buff, FILENAME_MAX);
+	std::string current_working_dir(buff);
+	return current_working_dir;
+}
+
 char* getChar(int size) {
 	char* buffer = new char[size];
 	return buffer;
@@ -25,30 +42,30 @@ char* strToChar(const std::string s) {
 	return cstr;
 }
 
-bool Storage::fileExists(const std::string filename)
+
+
+
+bool Converter::fileExists(const std::string filename)
 {
 	std::ifstream ifile(filename);
 	return ifile.good();
 }
 
-void Storage::readBinaryData(const std::string filename)
-{
+
+
+
+void Converter::convertFile(const std::string filename) {
 
 	if (!fileExists(filename)) {
-		throw std::exception(strToChar("File not found: " + filename));
+		throw std::runtime_error("File not found: " + filename);
 	}
 
-	std::ifstream file(filename, std::ios::in | std::ios::binary);
-	char* buffer = getChar(3463096);
-	file.read(buffer, 3463096);
+	BinaryFile file(filename);
 
-	auto y = base64::base64_encode((unsigned const char*)buffer, 3463096);
-
-	auto y2 = base64::base64_decode(y);
-	//writef("prtk.txt", y);
-
-	auto r = buffer[2];
+	file.dumpBinary("test.jpg");
 
 	std::cout << "";
+	
+	//b.data = "X";
 
 }

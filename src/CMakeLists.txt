@@ -17,13 +17,15 @@ target_sources(${TNAME} PRIVATE
     libs/base64.cpp
     libs/CLI11.hpp
     exencode/App.cpp
+    exencode/BinaryFile.cpp
     exencode/Converter.cpp
+    exencode/ErrorHandler.cpp
 )
 
 get_target_property(TARGET_SOURCES ${TNAME} SOURCES)
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-    TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
-endif()
+#if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+#    TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
+#endif()
 
  if(WIN32)
     add_definitions(-DPLATFORM="windows")
