@@ -3,10 +3,18 @@ cmake_minimum_required(VERSION 3.15)
 file(MAKE_DIRECTORY ../build)
 
 project (exencoder)
-add_executable(exencoder exencode/src/App.cpp)
+add_executable(exencoder)
 
 include_directories(libs)
 target_include_directories(exencoder PUBLIC exencode/include)
+
+set(target_sources
+    App.cpp
+    Converter.cpp
+)
+
+list(TRANSFORM target_sources PREPEND "exencode/src/")
+target_sources(exencoder PRIVATE ${target_sources})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
@@ -33,6 +41,7 @@ message("Cmake home dir: ${CMAKE_HOME_DIRECTORY}")
 message("Cmake binary dir: ${CMAKE_BINARY_DIR}")
 message("EXE output: ${EXECUTABLE_OUTPUT_PATH}")
 message("CXX Flags: ${CMAKE_CXX_FLAGS}")
+message("Sources: ${target_sources}")
 message("----------------------------------------")
 
 
@@ -43,3 +52,6 @@ message("----------------------------------------")
 #    TARGET exencoder
 #    POST_BUILD COMMAND "mt.exe" -manifest \"${EXECUTABLE_OUTPUT_PATH}\\exencoder.exe.manifest\" -outputresource:\"${EXECUTABLE_OUTPUT_PATH}\\exencoder.exe\"\;\#2
 #    COMMENT "Adding custom manifest containing MSVCRT80 dependency..." )
+
+#FILE(GLOB sources ${CMAKE_SOURCE_DIR}/source/*.cc)
+#ADD_EXECUTABLE(mycode ${sources})
