@@ -3,6 +3,12 @@
 #include <iostream>
 #include <fstream>
 
+//char* strToChar(const std::string s) {
+//	char* cstr = new char[size];
+//	std::copy(s.begin(), s.end(), cstr);
+//	cstr[s.size()] = '\0';
+//	return cstr;
+//}
 
 BinaryFile::BinaryFile() {}
 
@@ -32,12 +38,14 @@ long BinaryFile::getFileSize()
 
 void BinaryFile::dumpBinary(std::string path) {
 
-	std::ofstream file;
-	file.open(path);
-	file << base64::base64_decode(data);
-	file.close();
+	std::ofstream file(path, std::ios::out | std::ios::binary);
+	std::string dec = base64::base64_decode(data);
 
-
+	char* cstr = new char[size];
+	std::copy(dec.begin(), dec.end(), cstr);
+	cstr[dec.size()] = '\0';
+	file.write((const char *) cstr, size);
+	   
 }
 
 //auto y2 = base64::base64_decode(y);
