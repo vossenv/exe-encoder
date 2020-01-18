@@ -10,13 +10,7 @@
             "buildCommandArgs": "-v",
             "ctestCommandArgs": "",
             "inheritEnvironments": [ "msvc_x64_x64" ],
-            "variables": [
-                {
-                    "name": "CMAKE_INSTALL_PREFIX",
-                    "value": "",
-                    "type": "PATH"
-                }
-            ]
+            "variables": []
         }
     ]
 }

@@ -1,23 +1,26 @@
 
 cmake_minimum_required(VERSION 3.16)
+
+file(REMOVE ../build/*)
 file(MAKE_DIRECTORY ../build)
 
 set(TNAME "exencoder")
-
-project (${TNAME})
-add_executable(${TNAME})
-
-include_directories(libs)
-target_include_directories(${TNAME} PUBLIC exencode/include)
-target_sources(${TNAME} PRIVATE 
-    exencode/src/App.cpp
-    exencode/src/Converter.cpp
-)
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
-get_target_property(TARGET_SOURCES ${TNAME} SOURCES)
 
+project (${TNAME})
+
+add_executable(${TNAME})
+include_directories(libs)
+target_include_directories(${TNAME} PUBLIC include)
+target_sources(${TNAME} PRIVATE 
+    libs/base64.cpp
+    libs/CLI11.hpp
+    exencode/App.cpp
+    exencode/Converter.cpp
+)
+
+get_target_property(TARGET_SOURCES ${TNAME} SOURCES)
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
 endif()
