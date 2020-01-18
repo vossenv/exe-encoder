@@ -4,13 +4,19 @@
             "name": "x64-Release",
             "generator": "Ninja",
             "configurationType": "Release",
-            "buildRoot": "${projectDir}\\build",
+            "buildRoot": "${workspaceRoot}\\build",
             "cmakeExecutable": "C:/Program Files/CMake/bin/cmake.exe",
             "cmakeCommandArgs": "",
             "buildCommandArgs": "-v",
             "ctestCommandArgs": "",
             "inheritEnvironments": [ "msvc_x64_x64" ],
-            "variables": []
+            "variables": [
+                {
+                    "name": "CMAKE_INSTALL_PREFIX",
+                    "value": "",
+                    "type": "PATH"
+                }
+            ]
         }
     ]
 }

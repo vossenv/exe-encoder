@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project (ExEncoder)
+project (exencoder)
 #project(ExEncoder VERSION 1.0)
 
  if(WIN32)
@@ -12,10 +12,11 @@ project (ExEncoder)
     add_definitions(-DPLATFORM="linux")
  endif()
 
+file(MAKE_DIRECTORY ../build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(exencoder src/ExEncode.cpp)
+add_executable(exencoder exencode/src/App.cpp)
 
 TARGET_COMPILE_OPTIONS(exencoder PUBLIC "/MT$<$<CONFIG:Release>:>")
 
