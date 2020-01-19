@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 class ErrorHandler {
 public:
@@ -20,11 +21,16 @@ public:
 class BinaryFile {
 public:
 	std::string fileName;
-	std::string data;
+	std::string encodedData;
+	std::string binaryData;
 	long size = 0;
-	void read();
-	void dumpBinary(std::string path);
+	void readFromBinary();
+	void readFromEncoded();
+	void dumpToBinary();
+	void dumpToBinary(std::string path);
+	void dumpToEncodedStr(std::string path, std::string identifier);
 	long getFileSize();
+	std::vector<std::string> splitData();
 
 	BinaryFile(const std::string fileName);
 	BinaryFile();

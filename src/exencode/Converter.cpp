@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 
+
 //#include <sstream>
 //#include <algorithm>
 //#include <iterator>
@@ -14,8 +15,7 @@
 //#include "prtk.txt"
 
 
-#define WINDOWS
-#ifdef WINDOWS
+#ifdef ISWINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
 #else
@@ -25,7 +25,7 @@
 
 std::string get_current_dir() {
 	char buff[FILENAME_MAX]; //create string buffer to hold path
-	GetCurrentDir(buff, FILENAME_MAX);
+	auto v = GetCurrentDir(buff, FILENAME_MAX);
 	std::string current_working_dir(buff);
 	return current_working_dir;
 }
@@ -44,12 +44,13 @@ char* strToChar(const std::string s) {
 
 
 
-
 bool Converter::fileExists(const std::string filename)
 {
 	std::ifstream ifile(filename);
 	return ifile.good();
 }
+
+
 
 
 
@@ -62,7 +63,12 @@ void Converter::convertFile(const std::string filename) {
 
 	BinaryFile file(filename);
 
-	file.dumpBinary("test.jpg");
+
+	//file.dumpToEncodedStr("test.txt", "varx");
+
+	//file.dumpToBinary();
+
+	//file.dumpToBinary("test.jpg");
 
 	std::cout << "";
 	
