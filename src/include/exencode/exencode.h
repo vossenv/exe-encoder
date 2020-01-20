@@ -2,6 +2,10 @@
 #include <iostream>
 #include <vector>
 
+
+
+enum class dataType { BINARY, TEXT };
+
 class ErrorHandler {
 public:
 	static void terminator();
@@ -19,20 +23,32 @@ public:
 };
 
 class BinaryFile {
-public:
+public:	
+	
 	std::string fileName;
 	std::string encodedData;
-	std::string binaryData;
-	long size = 0;
+	BinaryFile::dataType contentType = dataType::BINARY;
+	long fileSize = 0;
 	void readFromBinary();
 	void readFromEncoded();
 	void dumpToBinary();
 	void dumpToBinary(std::string path);
+	void dumpToEncodedStr();
 	void dumpToEncodedStr(std::string path, std::string identifier);
+	void dumpToRawEncodedStr(std::string path);
+	void dumpToRawEncodedStr();
 	long getFileSize();
 	std::vector<std::string> splitData();
 
-	BinaryFile(const std::string fileName);
+	BinaryFile(const std::string & fileName, dataType contentType = dataType::BINARY);
 	BinaryFile();
+
+};
+
+class Util {
+
+public:
+	static std::vector<std::string> split(const std::string& s, std::string delims);
+	static std::vector<std::string> split(const std::string& s, char delim);
 
 };

@@ -30,17 +30,17 @@ std::string get_current_dir() {
 	return current_working_dir;
 }
 
-char* getChar(int size) {
-	char* buffer = new char[size];
-	return buffer;
-}
-
-char* strToChar(const std::string s) {
-	char* cstr = getChar(s.size());
-	std::copy(s.begin(), s.end(), cstr);
-	cstr[s.size()] = '\0';
-	return cstr;
-}
+//char* getChar(int size) {
+//	char* buffer = new char[size];
+//	return buffer;
+//}
+//
+//char* strToChar(const std::string s) {
+//	char* cstr = getChar(s.size());
+//	std::copy(s.begin(), s.end(), cstr);
+//	cstr[s.size()] = '\0';
+//	return cstr;
+//}
 
 
 

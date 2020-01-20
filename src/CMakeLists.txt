@@ -20,6 +20,7 @@ target_sources(${TNAME} PRIVATE
     exencode/BinaryFile.cpp
     exencode/Converter.cpp
     exencode/ErrorHandler.cpp
+    exencode/Util.cpp
 )
 
 get_target_property(TARGET_SOURCES ${TNAME} SOURCES)
