@@ -27,7 +27,8 @@ public:
 	
 	std::string fileName;
 	std::string encodedData;
-	BinaryFile::dataType contentType = dataType::BINARY;
+
+	dataType contentType = dataType::BINARY;
 	long fileSize = 0;
 	void readFromBinary();
 	void readFromEncoded();

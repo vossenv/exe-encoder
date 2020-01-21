@@ -1,6 +1,7 @@
 #include <exencode/exencode.h>
 #include <sstream>
 #include <string>
+#include <cstring>
 
 char* getChar(int size) {
 	char* buffer = new char[size];
