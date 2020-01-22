@@ -1,16 +1,24 @@
 
-
+#define strtk_no_tr1_or_boost
+#include <strtk/strtk.hpp>
 #include <iostream>
 #include <exencode/exencode.h>
 #include <CLI11.hpp>
 
-#ifndef PLATFORM
-#define PLATFORM "NO SYSTEM NAME"
-#endif
+
+
 
 int main()
 {
 	std::set_terminate(ErrorHandler::terminator);
+
+
+	std::string str = "abc|1$23|xyz|789";
+	std::string delims = " |.;?";
+
+	auto y = Util::split(str, "$");
+
+
 
 	Converter conv;
 
@@ -19,7 +27,7 @@ int main()
 
 	std::string x = "b/\n";
 
-	auto z = Util::split("a*/b*\\c", x);
+	//auto z = Util::split("a*/b*\\c", x);
 
 	std::cout << "";
 }

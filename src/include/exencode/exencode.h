@@ -48,7 +48,6 @@ public:
 class Util {
 
 public:
-	static std::vector<std::string> split(const std::string& s, std::string delims);
-	static std::vector<std::string> split(const std::string& s, char delim);
+	static std::vector<std::string> split(const std::string str, const std::string delims);
 
 };
