@@ -1,6 +1,4 @@
 
-#define strtk_no_tr1_or_boost
-#include <strtk/strtk.hpp>
 #include <iostream>
 #include <exencode/exencode.h>
 #include <CLI11.hpp>
