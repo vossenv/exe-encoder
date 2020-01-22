@@ -9,24 +9,22 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
 
 project (${TNAME})
-
 add_executable(${TNAME})
 include_directories(libs)
+
 target_include_directories(${TNAME} PUBLIC include)
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
+endif()
+
 target_sources(${TNAME} PRIVATE 
     libs/base64.cpp
-    libs/CLI11.hpp
     exencode/App.cpp
     exencode/BinaryFile.cpp
     exencode/Converter.cpp
     exencode/ErrorHandler.cpp
     exencode/Util.cpp
 )
-
-get_target_property(TARGET_SOURCES ${TNAME} SOURCES)
-#if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-#    TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
-#endif()
 
  if(WIN32)
     add_definitions(-DISWINDOWS)
@@ -42,12 +40,17 @@ message("OS Name: ${CMAKE_SYSTEM_NAME}")
 message("CXX Standard: ${CMAKE_CXX_STANDARD}")
 message("Compiler: ${CMAKE_CXX_COMPILER_ID}")
 message("Source dir: ${CMAKE_SOURCE_DIR}")
-message("Include path: ${CMAKE_INCLUDE_PATH}")
 message("Cmake home dir: ${CMAKE_HOME_DIRECTORY}")
 message("Cmake binary dir: ${CMAKE_BINARY_DIR}")
 message("EXE output: ${EXECUTABLE_OUTPUT_PATH}")
 message("CXX Flags: ${CMAKE_CXX_FLAGS}")
-message("Sources: ${TARGET_SOURCES}")
+message("Sources: ")
+get_target_property(TS ${TNAME} SOURCES)
+foreach(l ${TS}) 
+    string(REPLACE "/" ";" l ${l})
+    list (GET l -1 file)
+    message(" - ${file}")
+endforeach(l)
 message("----------------------------------------")
 
 
