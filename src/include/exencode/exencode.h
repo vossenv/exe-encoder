@@ -15,8 +15,8 @@ public:
 
 class Converter {
 public:
-	bool fileExists(const std::string filename);
-	void convertFile(const std::string filename);
+	bool fileExists(std::string filename);
+	void convertFile(std::string filename);
 
 	//Converter();
 
@@ -27,20 +27,20 @@ public:
 	
 	std::string fileName;
 	std::string encodedData;
-	BinaryFile::dataType contentType = dataType::BINARY;
+	dataType contentType = dataType::BINARY;
 	long fileSize = 0;
 	void readFromBinary();
 	void readFromEncoded();
 	void dumpToBinary();
-	void dumpToBinary(std::string path);
+	void dumpToBinary(const std::string& path);
 	void dumpToEncodedStr();
-	void dumpToEncodedStr(std::string path, std::string identifier);
-	void dumpToRawEncodedStr(std::string path);
+	void dumpToEncodedStr(const std::string& path, const std::string& identifier);
+	void dumpToRawEncodedStr(const std::string& path);
 	void dumpToRawEncodedStr();
 	long getFileSize();
 	std::vector<std::string> splitData();
 
-	BinaryFile(const std::string & fileName, dataType contentType = dataType::BINARY);
+	explicit BinaryFile(const std::string & fileName, dataType contentType = dataType::BINARY);
 	BinaryFile();
 
 };
@@ -48,6 +48,6 @@ public:
 class Util {
 
 public:
-	static std::vector<std::string> split(const std::string str, const std::string delims);
+	static std::vector<std::string> split(std::string str, std::string delims);
 
 };

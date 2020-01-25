@@ -13,7 +13,7 @@
             "variables": []
         },
         {
-            "name": "x64-Debug",
+            "name": "exencode-debug",
             "generator": "Ninja",
             "configurationType": "Debug",
             "buildRoot": "${workspaceRoot}\\build",
@@ -22,7 +22,13 @@
             "buildCommandArgs": "-v",
             "ctestCommandArgs": "",
             "inheritEnvironments": [ "msvc_x64_x64" ],
-            "variables": []
+            "variables": [
+                {
+                    "name": "CMAKE_INSTALL_PREFIX",
+                    "value": "",
+                    "type": "PATH"
+                }
+            ]
         }
     ]
 }

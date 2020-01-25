@@ -1,29 +1,29 @@
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.15)
 
-file(REMOVE ../build/*)
-file(MAKE_DIRECTORY ../build)
+file(REMOVE build/*)
+file(MAKE_DIRECTORY build)
 
-set(TNAME "exencoder")
+set(TNAME "exencode")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
 
 project (${TNAME})
 add_executable(${TNAME})
-include_directories(libs)
+include_directories(src/libs)
 
-target_include_directories(${TNAME} PUBLIC include)
+target_include_directories(${TNAME} PUBLIC src/include)
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
 endif()
 
 target_sources(${TNAME} PRIVATE 
-    libs/base64.cpp
-    exencode/App.cpp
-    exencode/BinaryFile.cpp
-    exencode/Converter.cpp
-    exencode/ErrorHandler.cpp
-    exencode/Util.cpp
+    src/libs/base64.cpp
+    src/exencode/App.cpp
+    src/exencode/BinaryFile.cpp
+    src/exencode/Converter.cpp
+    src/exencode/ErrorHandler.cpp
+    src/exencode/Util.cpp
 )
 
  if(WIN32)
