@@ -1,10 +1,6 @@
-
 #include <iostream>
 #include <exencode/exencode.h>
 #include <CLI11.hpp>
-
-
-
 
 int main()
 {
@@ -15,7 +11,6 @@ int main()
 	std::string delims = " |.;?";
 
 	auto y = Util::split(str, "$");
-
 
 
 	Converter conv;

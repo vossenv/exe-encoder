@@ -3,28 +3,29 @@
 #include <vector>
 
 
-
 enum class dataType { BINARY, TEXT };
 
-class ErrorHandler {
+class ErrorHandler
+{
 public:
 	static void terminator();
 	static void handle(const std::exception& e);
 };
 
 
-class Converter {
+class Converter
+{
 public:
 	bool fileExists(std::string filename);
 	void convertFile(std::string filename);
 
 	//Converter();
-
 };
 
-class BinaryFile {
-public:	
-	
+class BinaryFile
+{
+public:
+
 	std::string fileName;
 	std::string encodedData;
 	dataType contentType = dataType::BINARY;
@@ -40,14 +41,12 @@ public:
 	long getFileSize();
 	std::vector<std::string> splitData();
 
-	explicit BinaryFile(const std::string & fileName, dataType contentType = dataType::BINARY);
+	explicit BinaryFile(const std::string& fileName, dataType contentType = dataType::BINARY);
 	BinaryFile();
-
 };
 
-class Util {
-
+class Util
+{
 public:
 	static std::vector<std::string> split(std::string str, std::string delims);
-
 };
