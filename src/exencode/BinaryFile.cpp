@@ -15,13 +15,9 @@ BinaryFile::BinaryFile(const std::string& fileName, dataType contentType)
 	BinaryFile::fileSize = getFileSize();
 
 	if (contentType == dataType::BINARY)
-	{
 		readFromBinary();
-	}
 	else
-	{
 		readFromEncoded();
-	}
 }
 
 void BinaryFile::readFromBinary()
