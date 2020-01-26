@@ -40,18 +40,18 @@ std::string get_current_dir() {
 //	return cstr;
 //}
 
-bool Converter::fileExists(const std::string filename) {
-  std::ifstream ifile(filename);
+bool Converter::fileExists(const std::string& Filename) {
+  std::ifstream ifile(Filename);
   return ifile.good();
 }
 
-void Converter::convertFile(const std::string filename) {
+void Converter::convertFile(const std::string& Filename) {
 
-  if (!fileExists(filename)) {
-    throw std::runtime_error("File not found: " + filename);
+  if (!fileExists(Filename)) {
+    throw std::runtime_error("File not found: " + Filename);
   }
 
-  BinaryFile file(filename);
+  BinaryFile File(Filename);
 
   // file.dumpToEncodedStr("test.txt", "varx");
 

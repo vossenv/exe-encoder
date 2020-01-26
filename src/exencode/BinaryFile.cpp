@@ -6,23 +6,25 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-BinaryFile::BinaryFile() = default;
 
-BinaryFile::BinaryFile(const std::string& fileName, dataType contentType)
+
+BinaryFile::BinaryFile(const std::string& FileName, DataType ContentType)
 {
-	BinaryFile::fileName = fileName;
-	BinaryFile::contentType = contentType;
-	BinaryFile::fileSize = getFileSize();
+	fileName = FileName;
+	contentType = ContentType;
+	fileSize = getFileSize();
+	defaultIdentifier = "default_identifier";
 
-	if (contentType == dataType::BINARY)
+	if (ContentType == DataType::Binary) {
 		readFromBinary();
-	else
+	} else {
 		readFromEncoded();
+}
 }
 
 void BinaryFile::readFromBinary()
 {
-	char* buffer = new char[fileSize];
+	auto buffer = new char[fileSize];
 	std::ifstream file(fileName, std::ios::in | std::ios::binary);
 	file.read(buffer, fileSize);
 	encodedData = base64::base64_encode(reinterpret_cast<unsigned const char*>(buffer), fileSize);
@@ -46,60 +48,61 @@ void BinaryFile::readFromEncoded()
 	file.close();
 }
 
-void BinaryFile::dumpToBinary() { dumpToBinary(fileName + ".dec"); }
+void BinaryFile::dumpToBinary() const { dumpToBinary(fileName + ".dec"); }
 
-void BinaryFile::dumpToEncodedStr()
-{
-	dumpToEncodedStr(fileName + ".enc", "default_identifier");
-}
 
-void BinaryFile::dumpToRawEncodedStr()
+void BinaryFile::dumpToRawEncodedStr() const
 {
 	dumpToRawEncodedStr(fileName + ".raw");
 }
 
-void BinaryFile::dumpToBinary(const std::string& path)
+void BinaryFile::dumpToBinary(const std::string& Path) const
 {
-	std::string dec = base64::base64_decode(encodedData);
-
+	auto dec = base64::base64_decode(encodedData);
 	std::cout << dec;
-	char* cstr = new char[fileSize];
+	auto cstr = new char[fileSize];
 	std::copy(dec.begin(), dec.end(), cstr);
 	cstr[dec.size()] = '\0';
 
-	std::ofstream file(path, std::ios::out | std::ios::binary);
+	std::ofstream file(Path, std::ios::out | std::ios::binary);
 	file.write(static_cast<const char*>(cstr), fileSize);
 
 	file.close();
 }
 
-void BinaryFile::dumpToEncodedStr(const std::string& path,
-                                  const std::string& identifier)
+
+void BinaryFile::dumpToEncodedStr() const
+{
+	dumpToEncodedStr(fileName + ".enc", defaultIdentifier);
+}
+
+void BinaryFile::dumpToEncodedStr(const std::string& Path, const std::string& Identifier) const
 {
 	std::string formatted;
-	for (const auto& l : splitData())
+	for (const auto& l : splitData()) {
 		formatted += "\"" + l + "\",\n";
-	formatted = "std::string " + identifier + " []={\n" + formatted + "};";
+}
+	formatted = "std::string " + Identifier + " []={\n" + formatted + "};";
 
 	std::ofstream file;
-	file.open(path);
+	file.open(Path);
 	file << formatted;
 	file.close();
 }
 
-void BinaryFile::dumpToRawEncodedStr(const std::string& path)
+void BinaryFile::dumpToRawEncodedStr(const std::string& Path) const
 {
 	std::ofstream file;
-	file.open(path);
+	file.open(Path);
 	file << encodedData;
 	file.close();
 }
 
-std::vector<std::string> BinaryFile::splitData()
+auto BinaryFile::splitData() const -> std::vector<std::string>
 {
 	std::vector<std::string> result;
-	int blockSize(1600);
-	int index = 0;
+	auto blockSize(1600);
+	auto index = 0;
 	while (true)
 	{
 		try
@@ -120,8 +123,9 @@ std::vector<std::string> BinaryFile::splitData()
 	}
 
 	std::string recon;
-	for (const auto& l : result)
+	for (const auto& l : result) {
 		recon += l;
+}
 	if (recon != encodedData)
 	{
 		throw std::runtime_error("Encoded data mismatch! Aborting.");
@@ -130,9 +134,9 @@ std::vector<std::string> BinaryFile::splitData()
 	return result;
 }
 
-long BinaryFile::getFileSize()
+auto BinaryFile::getFileSize() const -> long
 {
 	struct stat stat_buf{};
-	int rc = stat(fileName.c_str(), &stat_buf);
+	auto rc = stat(fileName.c_str(), &stat_buf);
 	return rc == 0 ? stat_buf.st_size : -1;
 }

@@ -11,8 +11,8 @@ class base64
 
 
 public:
-	static std::string base64_encode(unsigned char const*, unsigned int len);
-	static std::string base64_decode(std::string const& s);
+	static auto base64_encode(unsigned char const*, unsigned int len) -> std::string;
+	static auto base64_decode(std::string const& s) -> std::string;
 
 
 

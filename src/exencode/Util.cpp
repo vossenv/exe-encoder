@@ -12,11 +12,13 @@ char* getChar(int size) {
 	return buffer;
 }
 
-std::vector<std::string> Util::split(const std::string str, const std::string delims) {
+std::vector<std::string> Util::split(const std::string Str, const std::string Delims) {
 	std::vector<std::string> token_list;
-	strtk::split(delims, str, strtk::range_to_type_back_inserter(token_list));
+	strtk::split(Delims, Str, strtk::range_to_type_back_inserter(token_list));
 	return token_list;
 }
+
+
 
 
 //std::vector<std::string> Util::split(const std::string& s, char delim)

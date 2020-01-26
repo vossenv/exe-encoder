@@ -17,6 +17,8 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     TARGET_COMPILE_OPTIONS(${TNAME} PUBLIC "/MT$<$<CONFIG:Release>:>")
 endif()
 
+#set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-static-libgcc -static-libstdc++ -static")
+
 target_sources(${TNAME} PRIVATE 
     src/libs/base64.cpp
     src/exencode/App.cpp
@@ -24,6 +26,7 @@ target_sources(${TNAME} PRIVATE
     src/exencode/Converter.cpp
     src/exencode/ErrorHandler.cpp
     src/exencode/Util.cpp
+    src/exencode/Encoders.cpp
 )
 
  if(WIN32)
